@@ -13,49 +13,83 @@
         >
         <script src="main.js"></script>
         <style>
+            body{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                height: 70vh;
+                font-family:monospace;
+                font-weight: 800;
+                background-color: rgb(252, 234, 213);
+            }
         button{
             margin-top: 20px;
-            padding: 8px;
+            padding: 10px;
             margin-right: 10px;
+            border-radius: 5px;
+            border: none;
+            box-shadow: 0px 0px 5px 3px rgba(128, 128, 128, 0.647);
+            transition: box-shadow 0.7s;
+        }
+
+        button:hover{
+            box-shadow: 0px 0px 5px 3px rgba(128, 128, 128, 0.203);
+            
+        }
+        #root{
+            font-size: 25px;
+        }
+        #activeButton{
+            background-color: brown;
+        }
+
+        #buttonDiv{
+            background-color: rgba(127, 255, 212, 0);
+            
         }
         </style>
     </head>
     <body>
         <div id="root"></div>
         <div id="buttonDiv">
-            <button onclick="">1</button>
+            <button>1</button>
             <button>2</button>
             <button>3</button>
+            <button>4</button>
         </div>
         <script>
     const root = document.getElementById("root");
     var buttonDiv = document.getElementById("buttonDiv");
 
-    const moviecontainer = [{name: "Half of a yellow sun"},{name: "The yellow cake"},{name: "THe pretty princess"},{name:"Bread and butter"},{name: "lamonda and a big Cup"},{name:"america babe"},{name:"Hello to new york"},{name:"A working man"} ]
+    const moviecontainer = [{name: "Half of a yellow sun"},{name: "The yellow cake"},{name: "The pretty princess"},{name:"The Good Samaritan"},{name: "The Big Wins"},{name:"America Babe"},{name:"Hello, New York"},{name:"A Working Man"} ]
     
     
     for(let x = 0; x < buttonDiv.children.length; x++){
         let pageNum = buttonDiv.children[x].innerHTML;
 
-        buttonDiv.children[x].addEventListener("click", ()=>{
+      var eventlistener =   buttonDiv.children[x].addEventListener("mouseover", ()=> {return paginate(pageNum,x)})
        
-            var a = "" ;  
-            var startNum = (pageNum - 1) * 2
      
-            var sliced = moviecontainer.slice(startNum, moviecontainer.length);
-            var spliced = sliced.splice(0, 2)
-            spliced.forEach((b)=>{ console.log(b.name)})
-
-            spliced.map((movie)=>{
-        a = a + `${movie.name}<br/><br/>` })
-
-        root.innerHTML = a 
-        })
-       
-
 
         
     }
+    function paginate(pageNum,x){
+       
+        var a = "" ;  
+        var startNum = (pageNum - 1) * 2
+
+       var sliced = moviecontainer.slice(startNum, moviecontainer.length);
+       var spliced = sliced.splice(0, 2)
+       spliced.forEach((b)=>{ console.log(b.name)})
+
+       spliced.map((movie)=>{
+   a = a + `${movie.name}<br/><br/>` })
+    
+   root.innerHTML = a 
+   }
+   paginate()
+
         </script>
     </body>
 </html>
